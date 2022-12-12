@@ -89,4 +89,10 @@ defmodule EmployeeRewardAppWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
   end
+
+  scope "/user", EmployeeRewardAppWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    resources "/transactions", TransactionController, only: [:index, :new, :create, :show]
+  end
 end
