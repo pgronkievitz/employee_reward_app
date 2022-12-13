@@ -76,4 +76,17 @@ defmodule EmployeeRewardApp.Accounts.UserNotifier do
     ==============================
     """)
   end
+
+  def deliver_points_notification(user, points) do
+    deliver(user.email, "You just received #{if points > 1, do: "points", else: "point"}!", """
+
+    ==============================
+
+    Hi #{user.email},
+
+    You just received #{points} #{if points > 1, do: "points", else: "point"}. Congrats!
+
+    ==============================
+    """)
+  end
 end

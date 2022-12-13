@@ -31,6 +31,9 @@ defmodule EmployeeRewardAppWeb.TransactionController do
 
     case Transactions.create_transaction(transaction_params) do
       {:ok, transaction} ->
+        Accounts.get_user!(transaction.to)
+        |> Accounts.UserNotifier.deliver_points_notification(transaction.value)
+
         conn
         |> put_flash(:info, "Transaction created successfully.")
         |> redirect(to: Routes.transaction_path(conn, :show, transaction))
