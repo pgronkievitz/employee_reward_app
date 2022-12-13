@@ -8,6 +8,7 @@ defmodule EmployeeRewardApp.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
     field :transaction_limit, :integer, default: 50
+    field :is_admin, :boolean, default: false
 
     timestamps()
   end
