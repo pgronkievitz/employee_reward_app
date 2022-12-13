@@ -3,11 +3,18 @@
 <ul>
 
   <li>
-    <strong>Value:</strong>
+    <strong>Amount:</strong>
     <%= @transaction.value %>
+  </li>
+  <li>
+    <strong>From:</strong>
+    <%= @from_user.email %>
+  </li>
+  <li>
+    <strong>To:</strong>
+    <%= @to_user.email %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.transaction_path(@conn, :edit, @transaction) %></span> |
 <span><%= link "Back", to: Routes.transaction_path(@conn, :index) %></span>

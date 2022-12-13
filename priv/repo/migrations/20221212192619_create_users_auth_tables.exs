@@ -8,7 +8,7 @@ defmodule EmployeeRewardApp.Repo.Migrations.CreateUsersAuthTables do
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
-      add :transaction_limit, :integer, default: 50, false: false
+      add :transaction_limit, :integer, default: 50, null: false
 
       timestamps()
     end

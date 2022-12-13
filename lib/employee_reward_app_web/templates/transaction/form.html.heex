@@ -9,6 +9,11 @@
   <%= number_input f, :value %>
   <%= error_tag f, :value %>
 
+  <%= label f, :to %>
+  <%= Phoenix.HTML.Form.select f, :to, @users %>
+  <%= error_tag f, :to %>
+
+
   <div>
     <%= submit "Save" %>
   </div>

@@ -51,7 +51,7 @@ defmodule EmployeeRewardApp.Transactions do
   """
   def create_transaction(attrs \\ %{}) do
     %Transaction{}
-    |> Transaction.changeset(attrs)
+    |> Transaction.changeset_val(attrs)
     |> Repo.insert()
   end
 
