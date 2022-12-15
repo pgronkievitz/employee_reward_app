@@ -5,16 +5,18 @@
     <tr>
       <th>Value</th>
 
-      <th></th>
+      <th>To</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
 <%= for transaction <- @transactions do %>
     <tr>
-      <td><%= transaction.value %></td>
+      <td><%= transaction.transaction.value %></td>
+      <td><%= transaction.user.email %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.transaction_path(@conn, :show, transaction) %></span>
+        <span><%= link "Show", to: Routes.transaction_path(@conn, :show, transaction.transaction) %></span>
       </td>
     </tr>
 <% end %>

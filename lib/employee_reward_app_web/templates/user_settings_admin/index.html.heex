@@ -5,18 +5,19 @@
     <tr>
       <th>Value</th>
 
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-<%= for user <- @users do %>
-    <tr>
-      <td><%= user.email %></td>
+    <%= for user <- @users do %>
+        <tr>
+        <td><%= user.email %></td>
 
-      <td>
-        <span><%= link "Edit", to: Routes.user_settings_admin_path(@conn, :edit, user) %></span>
-      </td>
-    </tr>
-<% end %>
+        <td>
+            <span><%= link "Edit", to: Routes.admin_user_settings_admin_path(@conn, :edit, user) %> </span>
+            <span> <%= link "Show", to: Routes.admin_user_settings_admin_path(@conn, :show, user) %></span>
+        </td>
+        </tr>
+    <% end %>
   </tbody>
 </table>

@@ -8,12 +8,20 @@ defmodule EmployeeRewardAppWeb.TransactionController do
   import Ecto.Query, warn: false
   alias EmployeeRewardApp.Accounts.User
 
-  def get_transactions(conn) do
+  defp get_transactions(conn) do
     if conn.assigns.current_user.is_admin do
-      Transactions.list_transactions()
+      from(transaction in Transaction,
+        join: user in User,
+        on: user.id == transaction.to,
+        select: %{user: user, transaction: transaction}
+      )
+      |> Repo.all()
     else
       from(transaction in Transaction,
-        where: transaction.from == ^conn.assigns.current_user.id
+        where: transaction.from == ^conn.assigns.current_user.id,
+        join: user in User,
+        on: user.id == transaction.to,
+        select: %{user: user, value: transaction}
       )
       |> Repo.all()
     end

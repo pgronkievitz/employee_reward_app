@@ -27,7 +27,7 @@ defmodule EmployeeRewardAppWeb.UserSettingsAdminController do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "Transaction limit updated successfully.")
-        |> redirect(to: Routes.user_settings_admin_path(conn, :index))
+        |> redirect(to: Routes.admin_user_settings_admin_path(conn, :index))
 
       {:error, changeset} ->
         render(conn, "edit.html", params: params, limit_changeset: changeset)

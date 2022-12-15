@@ -72,7 +72,7 @@ defmodule EmployeeRewardAppWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
-  scope "/admin", EmployeeRewardAppWeb do
+  scope "/admin", EmployeeRewardAppWeb, as: :admin do
     pipe_through [:browser, :require_authenticated_user, :require_admin_user]
     resources "/transactions", TransactionController
     get "/users", UserSettingsAdminController, :index
@@ -101,7 +101,7 @@ defmodule EmployeeRewardAppWeb.Router do
 
   scope "/", EmployeeRewardAppWeb do
     pipe_through [:browser, :require_authenticated_user]
-    resources "/transactions", TransactionController, only: [:index, :new, :create, :show]
+    resources "/transactions", TransactionController, except: [:delete, :edit, :update]
     get "/dashboard", DashboardController, :index
   end
 end
