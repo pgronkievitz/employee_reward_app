@@ -8,9 +8,19 @@ defmodule EmployeeRewardAppWeb.TransactionController do
   import Ecto.Query, warn: false
   alias EmployeeRewardApp.Accounts.User
 
+  def get_transactions(conn) do
+    if conn.assigns.current_user.is_admin do
+      Transactions.list_transactions()
+    else
+      from(transaction in Transaction,
+        where: transaction.from == ^conn.assigns.current_user.id
+      )
+      |> Repo.all()
+    end
+  end
+
   def index(conn, _params) do
-    transactions = Transactions.list_transactions()
-    render(conn, "index.html", transactions: transactions)
+    render(conn, "index.html", transactions: get_transactions(conn))
   end
 
   @spec new(Plug.Conn.t(), any) :: Plug.Conn.t()
@@ -57,7 +67,13 @@ defmodule EmployeeRewardAppWeb.TransactionController do
   def edit(conn, %{"id" => id}) do
     transaction = Transactions.get_transaction!(id)
     changeset = Transactions.change_transaction(transaction)
-    render(conn, "edit.html", transaction: transaction, changeset: changeset)
+
+    users =
+      from(user in User, where: user.id != ^conn.assigns.current_user.id)
+      |> Repo.all()
+      |> Enum.map(fn user -> {user.email, user.id} end)
+
+    render(conn, "edit.html", transaction: transaction, changeset: changeset, users: users)
   end
 
   def update(conn, %{"id" => id, "transaction" => transaction_params}) do
