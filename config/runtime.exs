@@ -69,10 +69,16 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :employee_reward_app, EmployeeRewardApp.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
+  config :employee_reward_app, EmployeeRewardApp.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: "smtp.purelymail.com",
+    username: {:system, "MAILER_USERNAME"},
+    password: {:system, "MAILER_PASSWORD"},
+    ssl: true,
+    tls: :always,
+    auth: :always,
+    port: 465
+
   #
   # For this example you need include a HTTP client required by Swoosh API client.
   # Swoosh supports Hackney and Finch out of the box:
