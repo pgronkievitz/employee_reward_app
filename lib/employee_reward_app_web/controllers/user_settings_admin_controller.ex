@@ -23,9 +23,7 @@ defmodule EmployeeRewardAppWeb.UserSettingsAdminController do
     %{"id" => id, "user" => user_params} = params
     user_orig = Accounts.get_user!(id)
 
-    tmp = Accounts.update_transaction_limit(user_orig, user_params) |> IO.inspect()
-
-    case tmp do
+    case Accounts.update_transaction_limit(user_orig, user_params) do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "Transaction limit updated successfully.")

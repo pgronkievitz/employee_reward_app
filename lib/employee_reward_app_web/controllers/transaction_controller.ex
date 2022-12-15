@@ -5,7 +5,7 @@ defmodule EmployeeRewardAppWeb.TransactionController do
   alias EmployeeRewardApp.Accounts
   alias EmployeeRewardApp.Transactions.Transaction
   alias EmployeeRewardApp.Repo
-  import Ecto.Query
+  import Ecto.Query, warn: false
   alias EmployeeRewardApp.Accounts.User
 
   def index(conn, _params) do
@@ -20,7 +20,6 @@ defmodule EmployeeRewardAppWeb.TransactionController do
     users =
       from(user in User, where: user.id != ^conn.assigns.current_user.id)
       |> Repo.all()
-      |> IO.inspect()
       |> Enum.map(fn user -> {user.email, user.id} end)
 
     render(conn, "new.html", changeset: changeset, users: users)
@@ -42,7 +41,6 @@ defmodule EmployeeRewardAppWeb.TransactionController do
         users =
           from(user in User, where: user.id != ^conn.assigns.current_user.id)
           |> Repo.all()
-          |> IO.inspect()
           |> Enum.map(fn user -> {user.email, user.id} end)
 
         render(conn, "new.html", changeset: changeset, users: users)

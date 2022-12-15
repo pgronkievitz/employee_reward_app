@@ -1,6 +1,6 @@
 defmodule EmployeeRewardApp.Accounts.UserToken do
   use Ecto.Schema
-  import Ecto.Query
+  import Ecto.Query, warn: false
   alias EmployeeRewardApp.Accounts.UserToken
 
   @hash_algorithm :sha256

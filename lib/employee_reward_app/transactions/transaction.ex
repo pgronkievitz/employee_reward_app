@@ -1,7 +1,7 @@
 defmodule EmployeeRewardApp.Transactions.Transaction do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
+  import Ecto.Query, warn: false
   alias EmployeeRewardApp.Transactions.Transaction
   alias EmployeeRewardApp.Accounts
   alias EmployeeRewardApp.Repo
