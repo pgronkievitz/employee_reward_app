@@ -1,0 +1,22 @@
+<h1>User <em><%= @user.email %></em> summary</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>To</th>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for row <- @data do %>
+        <tr>
+            <td><%= row.email %></td>
+            <td><%= round(row.year) %></td>
+            <td><%= round(row.month) %></td>
+            <td><%= row.value %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

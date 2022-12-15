@@ -1,0 +1,22 @@
+<h1>Listing Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.email %></td>
+
+      <td>
+        <span><%= link "Edit", to: Routes.user_settings_admin_path(@conn, :edit, user) %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

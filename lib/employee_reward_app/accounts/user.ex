@@ -105,6 +105,12 @@ defmodule EmployeeRewardApp.Accounts.User do
     |> validate_password(opts)
   end
 
+  def transaction_limit_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:transaction_limit])
+    |> validate_number(:transaction_limit, greater_than_or_equal_to: 0)
+  end
+
   @doc """
   Confirms the account by setting `confirmed_at`.
   """

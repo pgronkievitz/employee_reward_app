@@ -187,6 +187,16 @@ defmodule EmployeeRewardApp.Accounts do
     User.password_changeset(user, attrs, hash_password: false)
   end
 
+  def change_user_transaction_limit(%User{} = user, attrs \\ %{}) do
+    User.transaction_limit_changeset(user, attrs)
+  end
+
+  def update_transaction_limit(%User{} = user, attrs) do
+    user
+    |> User.transaction_limit_changeset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Updates the user password.
 

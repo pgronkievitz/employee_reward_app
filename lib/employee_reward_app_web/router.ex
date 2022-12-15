@@ -72,6 +72,15 @@ defmodule EmployeeRewardAppWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
+  scope "/admin", EmployeeRewardAppWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+    resources "/transactions", TransactionController
+    get "/users", UserSettingsAdminController, :index
+    get "/users/:id/settings", UserSettingsAdminController, :edit
+    put "/users/:id", UserSettingsAdminController, :update
+    get "/users/:id", UserSettingsAdminController, :show
+  end
+
   scope "/", EmployeeRewardAppWeb do
     pipe_through [:browser, :require_authenticated_user]
 
