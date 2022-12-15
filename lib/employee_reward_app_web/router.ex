@@ -41,7 +41,7 @@ defmodule EmployeeRewardAppWeb.Router do
     scope "/" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: EmployeeRewardAppWeb.Telemetry
+      live_dashboard "/live_dashboard", metrics: EmployeeRewardAppWeb.Telemetry
     end
   end
 
@@ -99,9 +99,9 @@ defmodule EmployeeRewardAppWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
   end
 
-  scope "/user", EmployeeRewardAppWeb do
+  scope "/", EmployeeRewardAppWeb do
     pipe_through [:browser, :require_authenticated_user]
-
     resources "/transactions", TransactionController, only: [:index, :new, :create, :show]
+    get "/dashboard", DashboardController, :index
   end
 end
