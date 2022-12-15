@@ -11,7 +11,9 @@ defmodule EmployeeRewardApp.TransactionsFixtures do
     {:ok, transaction} =
       attrs
       |> Enum.into(%{
-        value: 42
+        value: 42,
+        to: 1,
+        from: 2
       })
       |> EmployeeRewardApp.Transactions.create_transaction()
 
