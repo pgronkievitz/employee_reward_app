@@ -1,0 +1,20 @@
+<h1>User dashboard</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>To</th>
+            <th>Value</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for transaction <- @transactions do %>
+            <tr>
+                <td><%= transaction[:to].email %></td>
+                <td><%= transaction[:transaction].value %></td>
+                <td><%= link "Show", to: Routes.transaction_path(@conn, :show, transaction[:transaction]) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
