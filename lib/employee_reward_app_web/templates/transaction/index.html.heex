@@ -17,6 +17,10 @@
 
       <td>
         <span><%= link "Show", to: Routes.transaction_path(@conn, :show, transaction.transaction) %></span>
+        <%= if @conn.assigns.current_user.is_admin do %>
+          <span><%= link "Edit", to: Routes.admin_transaction_path(@conn, :edit, transaction.transaction) %></span>
+          <span><%= link "Delete", to: Routes.admin_transaction_path(@conn, :delete, transaction.transaction), method: :delete %></span>
+        <% end %>
       </td>
     </tr>
 <% end %>
